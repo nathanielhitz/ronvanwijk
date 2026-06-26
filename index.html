@@ -133,7 +133,7 @@ ul, ol { list-style: none; }
   border-radius: var(--r); transition: background .15s;
 }
 .nav-cta-btn:hover { background: var(--amber-dk); }
-.nav-hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; padding: 8px; }
+.nav-hamburger { display: none; flex-direction: column; align-items: center; justify-content: center; gap: 5px; background: none; border: none; padding: 0; width: 44px; height: 44px; margin-right: -10px; }
 .nav-hamburger span { display: block; width: 22px; height: 2px; background: #ede8e0; border-radius: 2px; transition: transform .25s, opacity .25s; }
 .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .nav-hamburger.open span:nth-child(2) { opacity: 0; }
@@ -172,7 +172,7 @@ ul, ol { list-style: none; }
   color: var(--amber); font-weight: 700; margin-bottom: 18px;
 }
 .hero h1 {
-  font-size: clamp(32px, 7vw, 68px); font-weight: 800;
+  font-size: clamp(30px, 7vw, 68px); font-weight: 800;
   letter-spacing: -.03em; line-height: 1.03;
   color: #ede8e0; text-wrap: balance; margin-bottom: 18px;
 }
@@ -438,14 +438,28 @@ details[open] .faq-arrow { transform: rotate(45deg); }
   .contact-methods { flex-direction: column; align-items: center; }
   .contact-method { width: 100%; max-width: 300px; }
   .mobile-bar { display: flex; }
-  body { padding-bottom: 56px; }
-  .stat-item { flex: 0 0 auto; }
+  body { padding-bottom: calc(56px + env(safe-area-inset-bottom, 0px)); }
+
+  /* Stats: 2×2 grid zodat alle vertrouwenssignalen zichtbaar blijven (geen verborgen scroll) */
+  .stats-bar-inner { display: grid; grid-template-columns: 1fr 1fr; overflow: visible; }
+  .stat-item {
+    flex: none; justify-content: center; text-align: center;
+    white-space: normal; line-height: 1.4; padding: 14px 14px;
+    font-size: 12px; border-right: none;
+  }
+  .stat-item:nth-child(odd)  { border-right: 1px solid rgba(255,255,255,.06); }
+  .stat-item:nth-child(-n+2) { border-bottom: 1px solid rgba(255,255,255,.06); }
+
+  /* Footer: netjes gestapeld en links uitgelijnd op mobiel */
+  .footer-inner { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .footer-legal { text-align: left; }
 }
 @media (max-width: 480px) {
   .process-grid { grid-template-columns: 1fr; }
   .projects-grid { grid-template-columns: 1fr; }
   .hero-buttons { flex-direction: column; }
   .hero-buttons .btn { justify-content: center; }
+  .hero-content { padding-left: 20px; padding-right: 20px; }
   .wrap { padding: 0 18px; }
 }
 @media (prefers-reduced-motion: reduce) {
